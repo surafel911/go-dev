@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+/* Go supports pointers and have the same syntax and semantics as in C++ */
+
 func main() {
 	i := 7
 	var p *int = &i
