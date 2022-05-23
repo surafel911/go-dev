@@ -21,6 +21,18 @@ func sum(x int, y int) int {
 	return x + y
 }
 
+/* Functions can accept a variadic number of arguments, so long as they are
+ * of the same type.
+ */
+func sums(nums... int) int {
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+
+	return total
+}
+
 /*
  * Functions can have multiple return values. Denoted as a comma-separated
  * list of types wrapped in parenthesis. All return statements need to return
@@ -44,8 +56,11 @@ func sqrt(x float64) (float64, error) {
 	return math.Sqrt(x), nil
 }
 
+
+
 func main() {
 	fmt.Println(sum(4, 5))
+	fmt.Println(sums(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
 
 	/* When a function has two return variables, you *should* handle them
 	 * either with `_` or by assigning them to a variable. Syntactically
