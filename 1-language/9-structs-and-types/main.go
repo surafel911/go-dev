@@ -13,18 +13,27 @@ type person struct {
 	age int
 }
 
-/* Go is a procedural language, not an object-oriented one. Meaning that
- * functions that access/modify data types are no associated with types
- * (e.g., recall the `make` and `delete` functions). Return to the `C`
- * mentality.
+/* Go does not have inheritence, rather it supports composition of
+ * types. To compose complex types, treat it like build-in types or
+ * simply the type name where it will act as the member name and type.
  */
-func say_hello(p person) {
+type person_info struct {
+	person
+	id int
+}
+
+/* Go supports member functions (i.e., methods). Methods are declared and
+ * defined outside of the struct. Rather than using `this`, define a
+ * `reciever type` using this syntax.
+ */
+func (p person) say_hello() {
 	fmt.Println(p.name, "says hello!")
 }
 
 func main () {
 	/* Structs can also be initialized inline. */
 	p := person {name: "Surafel", age: 23}
+	info := person_info { person: p, id: 1234}
 
 	/* Go can list out the values of members in fmt.Println() automagically. */
 	fmt.Println(p)
@@ -32,5 +41,9 @@ func main () {
 
 	fmt.Println()
 
-	say_hello(p)
+	fmt.Println(info)
+
+	fmt.Println()
+
+	p.say_hello()
 }
