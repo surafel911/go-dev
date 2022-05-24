@@ -20,18 +20,25 @@ func main() {
 		c1 <- "result 1"
 	}()
 
+	
+	/* The `time.After()` method returns a channel with the actual elapsed
+	 * time. In this example, we only care that a message was recieved on
+	 * that channel, so we simply recieve from from the returned channel in
+	 * the case statement.
+	 */
+	timeout := time.After(time.Second * 2)
+
 	/* In this example, the message is recieved before the timeout occurs.
 	 * A result message should be printed.
 	 */
 	select {
 	case res := <- c1:
 		fmt.Println(res)
-	/* the `time.After()` method returns a channel with the actual elapsed
-	 * time. In this example, we only care that a message was recieved on
-	 * that channel, so we simply recieve from from the returned channel in
-	 * the case statement.
+	
+	/* Recieve from the timeout channel. A message will be recieved when the
+	 * time has elasped.
 	 */
-	case <- time.After(time.Second * 2):
+	case <- timeout:
 		fmt.Println("timeout 1")
 	}
 
@@ -48,6 +55,7 @@ func main() {
 	select {
 	case res := <- c2:
 		fmt.Println(res)
+	/* For syntactic sugar you can forgo the channel variable. */
 	case <- time.After(time.Second * 1):
 		fmt.Println("timeout 2")
 	}
