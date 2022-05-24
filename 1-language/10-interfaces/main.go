@@ -93,6 +93,10 @@ func what_complex_type(value interface{}) {
 	/* Switch cases also support type switching. The type of an empty
 	 * interface can be accessed with this syntax.
 	 *
+	 * The `i.(T)` is the type-assertion syntax, to assert that `i` is 
+	 * identical to the type T and/or `i` implements type T. Using the `type`
+	 * in place of T returns the type-id.
+	 * 
 	 * More info about type switching here:
 	 * https://www.geeksforgeeks.org/type-switches-in-golang/
 	 */
